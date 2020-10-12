@@ -1,9 +1,9 @@
 
 
 var api = {
-	root: "https://api.themoviedb.org/3",
-	token: "" // TODO put your api key here
-}
+  root: "https://api.themoviedb.org/3",
+  token: "96981688b770f7bc9fdff26c4166c6f3", // TODO put your api key here
+};
 
 /**
  * Makes an AJAX request to themoviedb.org, asking for some movies
