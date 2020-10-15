@@ -1,23 +1,22 @@
+var domWatchList = $($("#section-watchlist").children()[1]);
+var domMovieList = $($("#section-browse").children()[1]);
+
 var model = {
-  watchlistItems: [],
+  watchListItems: [],
   browseItems: [],
 };
-
 var api = {
   root: "https://api.themoviedb.org/3",
   token: myApiKey,
 };
 
-/**
- * Makes an AJAX request to themoviedb.org, asking for some movies
- * if successful, updates the model.browseItems appropriately, and then invokes
- * the callback function that was passed in
- */
+/* Makes an AJAX request to themoviedb.org, asking for some movies if successful, updates the model.browseItems appropriately, and then invokes the callback function that was passed in */
 function discoverMovies(callback) {
   $.ajax({
-    url: api.root + "/discover/movie",
+    url: `${api.root}/discover/movie`,
     data: {
       api_key: api.token,
+      page: randInt(1, 100),
     },
     success: function (response) {
       console.log("We got a response from The Movie DB!");
@@ -31,24 +30,41 @@ function discoverMovies(callback) {
 }
 
 console.log("The script loaded!");
-/**
- * re-renders the page with new content, based on the current state of the model
- */
+// re-renders the page with new content, based on the current state of the model
 function render() {
-  // TODO 7
-  // clear everything from both lists
+  while (domWatchList.children().length) domWatchList.children()[0].remove();
+  while (domMovieList.children().length) domMovieList.children()[0].remove();
+  model.watchListItems.forEach((title) => {
+    let liMovie = $("<li>", { class: "movieItem" });
+    let movieTitle = $("<p>", {
+      html: `${title}`,
+      class: "movieTitle",
+    });
+    liMovie.append(movieTitle);
+    domWatchList.append(liMovie);
+  });
 
-  // TODO 6
-  // for each movie on the user's watchlist, insert a list item into the <ul> in the watchlist section
-
-  // for each movie on the current browse list,
-  model.browseItems.forEach(function (movie) {
-    // TODO 3
-    // insert a list item into the <ul> in the browse section
-    // TODO 4
-    // the list item should include a button that says "Add to Watchlist"
-    // TODO 5
-    // when the button is clicked, this movie should be added to the model's watchlist and render() should be called again
+  model.browseItems.forEach((movie) => {
+    let liMovie = $("<li>", { class: "movieItem" });
+    let movieTitle = $("<p>", {
+      html: `${movie.title}`,
+      class: "movieTitle",
+    });
+    let addToWLBtn = $("<button>", {
+      html: "Add to Watchlist",
+      class: "addToWLBtn",
+    }).on("click", (event) => {
+      thisMovie = $(event.target).prev().html();
+      if (
+        !model.watchListItems.filter((movieWL) => movieWL == thisMovie).length
+      ) {
+        model.watchListItems.push(thisMovie);
+      }
+      console.log(model.watchListItems);
+      render();
+    });
+    liMovie.append(movieTitle, addToWLBtn);
+    domMovieList.append(liMovie);
   });
 }
 

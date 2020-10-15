@@ -1,0 +1,12 @@
+.movieItem {
+  margin-bottom: 20px;
+}
+
+.movieTitle {
+  display: inline-block;
+}
+
+.addToWLBtn {
+  margin-left: 15px;
+  cursor: pointer;
+}
