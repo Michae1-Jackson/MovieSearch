@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-var api = {
-  root: "https://api.themoviedb.org/3",
-  token: "96981688b770f7bc9fdff26c4166c6f3",
-};
-
-/** Makes an AJAX request to themoviedb.org,
- * asking for some movies
- * if successful, prints the results to the console */
-function testTheAPI() {
-=======
 var model = {
   watchlistItems: [],
   browseItems: [],
@@ -25,7 +14,6 @@ var api = {
  * the callback function that was passed in
  */
 function discoverMovies(callback) {
->>>>>>> studio1
   $.ajax({
     url: api.root + "/discover/movie",
     data: {
@@ -34,21 +22,15 @@ function discoverMovies(callback) {
     success: function (response) {
       console.log("We got a response from The Movie DB!");
       console.log(response);
-<<<<<<< HEAD
-=======
 
       model.browseItems = response.results;
       // invoke the callback function that was passed in.
       callback();
->>>>>>> studio1
     },
   });
 }
 
-<<<<<<< HEAD
 console.log("The script loaded!");
-testTheAPI();
-=======
 /**
  * re-renders the page with new content, based on the current state of the model
  */
@@ -75,4 +57,3 @@ function render() {
 $(document).ready(function () {
   discoverMovies(render);
 });
->>>>>>> studio1
