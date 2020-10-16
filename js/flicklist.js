@@ -1,5 +1,5 @@
-var domWatchList = $($("#section-watchlist").children()[1]);
-var domMovieList = $($("#section-browse").children()[1]);
+var domWatchList = $("#section-watchlist ul");
+var domMovieList = $("#section-browse ul");
 
 var model = {
   watchListItems: [],
@@ -19,11 +19,7 @@ function discoverMovies(callback) {
       page: randInt(1, 100),
     },
     success: function (response) {
-      console.log("We got a response from The Movie DB!");
-      console.log(response);
-
       model.browseItems = response.results;
-      // invoke the callback function that was passed in.
       callback();
     },
   });
@@ -32,8 +28,8 @@ function discoverMovies(callback) {
 console.log("The script loaded!");
 // re-renders the page with new content, based on the current state of the model
 function render() {
-  while (domWatchList.children().length) domWatchList.children()[0].remove();
-  while (domMovieList.children().length) domMovieList.children()[0].remove();
+  domWatchList.empty();
+  domWatchList.empty();
   model.watchListItems.forEach((title) => {
     let liMovie = $("<li>", { class: "movieItem" });
     let movieTitle = $("<p>", {
@@ -60,7 +56,6 @@ function render() {
       ) {
         model.watchListItems.push(thisMovie);
       }
-      console.log(model.watchListItems);
       render();
     });
     liMovie.append(movieTitle, addToWLBtn);
