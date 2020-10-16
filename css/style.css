@@ -9,10 +9,12 @@
 html {
   font-size: 16px;
   font-family: "Montserrat", sans-serif;
+  cursor: default;
 }
 
 .wrapper {
-  width: 1024px;
+  width: 100%;
+  max-width: 1024px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -52,8 +54,9 @@ ul {
   list-style-type: none;
 }
 
-.movie_item {
-}
+/* .movie_block {
+
+} */
 
 .movie_title {
   margin: 0 0 8px 100px;
@@ -61,7 +64,7 @@ ul {
 }
 
 .movie_overview {
-  margin: 0 0 10px 10px;
+  margin: 0 10px 10px 10px;
   line-height: 1.5rem;
   text-indent: 1rem;
 }
@@ -69,9 +72,9 @@ ul {
 .item_del {
   height: 2px;
   width: 100%;
-  max-width: 900px;
+  max-width: 856px;
   background-color: darkgrey;
-  margin: 15px 0 15px 0;
+  margin: 15px auto;
 }
 
 /* Watch List Section */
