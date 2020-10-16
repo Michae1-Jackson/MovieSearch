@@ -1,5 +1,5 @@
-var domWatchList = $("#section-watchlist ul");
-var domMovieList = $("#section-browse ul");
+var domWatchList = $("#section_watchlist ul");
+var domMovieList = $("#section_browse ul");
 
 var model = {
   watchListItems: [],
@@ -29,37 +29,57 @@ console.log("The script loaded!");
 // re-renders the page with new content, based on the current state of the model
 function render() {
   domWatchList.empty();
-  domWatchList.empty();
-  model.watchListItems.forEach((title) => {
-    let liMovie = $("<li>", { class: "movieItem" });
+  domMovieList.empty();
+  model.watchListItems.forEach((movie) => {
+    let liMovie = $("<li>", { class: "movie_item" });
     let movieTitle = $("<p>", {
-      html: `${title}`,
-      class: "movieTitle",
+      html: `${movie.title}`,
+      class: "movie_title",
     });
-    liMovie.append(movieTitle);
-    domWatchList.append(liMovie);
+    let movieOverview = $("<p>", {
+      html: `${movie.overview}`,
+      class: "movie_overview",
+    });
+    liMovie.append(movieTitle, movieOverview);
+    domWatchList.append(liMovie, $("<div>", { class: "item_del" }));
   });
 
   model.browseItems.forEach((movie) => {
-    let liMovie = $("<li>", { class: "movieItem" });
+    let liMovie = $("<li>", { class: "movie_item" });
     let movieTitle = $("<p>", {
       html: `${movie.title}`,
-      class: "movieTitle",
+      class: "movie_title",
     });
-    let addToWLBtn = $("<button>", {
-      html: "Add to Watchlist",
-      class: "addToWLBtn",
-    }).on("click", (event) => {
-      thisMovie = $(event.target).prev().html();
-      if (
-        !model.watchListItems.filter((movieWL) => movieWL == thisMovie).length
-      ) {
-        model.watchListItems.push(thisMovie);
-      }
-      render();
+    let movieOverview = $("<p>", {
+      html: `${movie.overview}`,
+      class: "movie_overview",
     });
-    liMovie.append(movieTitle, addToWLBtn);
-    domMovieList.append(liMovie);
+    liMovie.append(movieTitle, movieOverview);
+    let added = model.watchListItems.filter(
+      (movie) => movie.title == movieTitle.html()
+    ).length;
+    if (!added) {
+      liMovie.append(
+        $("<div>", {
+          html: "Add to Watch List",
+          class: "add_to_WL_btn",
+        }).click(() => {
+          model.watchListItems.push({
+            title: movieTitle.html(),
+            overview: movieOverview.html(),
+          });
+          render();
+        })
+      );
+    } else {
+      liMovie.append(
+        $("<div>", {
+          html: "Aready in your Watch List!",
+          class: "already_in_WL",
+        })
+      );
+    }
+    domMovieList.append(liMovie, $("<div>", { class: "item_del" }));
   });
 }
 

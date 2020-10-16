@@ -1,12 +1,112 @@
-.movieItem {
-  margin-bottom: 20px;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+
+/* Supporting */
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.movieTitle {
-  display: inline-block;
+html {
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
 }
 
-.addToWLBtn {
-  margin-left: 15px;
+.wrapper {
+  width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Header */
+
+header {
+  background-color: bisque;
+  height: 100px;
+}
+
+.header_content {
+  display: grid;
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 30% 70%;
+  padding-top: 10px;
+}
+
+.main_header {
+  font-size: 4rem;
+}
+
+.header_content > p {
+  font-size: 2rem;
+}
+
+/* Both Sections */
+
+h2 {
+  margin: 0 auto 20px auto;
+  font-size: 2.5rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.movie_item {
+}
+
+.movie_title {
+  margin: 0 0 8px 100px;
+  font-size: 1.8rem;
+}
+
+.movie_overview {
+  margin: 0 0 10px 10px;
+  line-height: 1.5rem;
+  text-indent: 1rem;
+}
+
+.item_del {
+  height: 2px;
+  width: 100%;
+  max-width: 900px;
+  background-color: darkgrey;
+  margin: 15px 0 15px 0;
+}
+
+/* Watch List Section */
+
+#section_watchlist {
+  background-color: whitesmoke;
+  padding: 30px 0 15px 0;
+}
+
+/* Browse List Section */
+
+#section_browse {
+  background-color: khaki;
+  padding: 30px 0 15px 0;
+}
+
+.add_to_WL_btn,
+.already_in_WL {
+  margin-left: 60%;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 1rem;
+  height: 40px;
+  width: 300px;
+  border: none;
+  box-shadow: 0 0 5px 1px silver;
+  border-radius: 4px;
+}
+.add_to_WL_btn {
+  background-color: cornflowerblue;
+  transition: background-color 0.3s ease-in-out;
   cursor: pointer;
+}
+.already_in_WL,
+.add_to_WL_btn:hover {
+  background-color: skyblue;
+  user-select: none;
 }
