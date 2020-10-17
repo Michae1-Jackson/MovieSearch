@@ -137,27 +137,55 @@ ul {
   padding: 30px 0 15px 0;
 }
 
-#title_input,
-#topic_input {
-  display: block;
-  margin: 0 auto 1.5rem auto;
-  padding-left: 1rem;
-  height: 3rem;
+.movie_search {
   width: 88%;
   max-width: 968px;
-  outline: none;
-  border: none;
-  font-size: 1.2rem;
-  border-radius: 2px;
-  box-shadow: 0 0 4px 0 whitesmoke;
-  transition: all 0.15s;
+  margin: 4px auto 1.6rem auto;
+  display: grid;
+  grid-template-columns: 80% 20%;
 }
 
-#title_input:hover,
-#topic_input:hover,
-#title_input:focus,
-#topic_input:focus {
-  box-shadow: 0 0 10px 1px lightgray;
+.input_block:hover {
+  box-shadow: 0 0 4px 0 lightblue;
+}
+
+.input_block:focus {
+  box-shadow: 0 0 4px 1px lightskyblue;
+}
+
+.input_block {
+  display: block;
+  padding-left: 1rem;
+  height: 3rem;
+  width: 98%;
+  font-size: 1.2rem;
+  outline: none;
+  border: none;
+  box-shadow: 0 0 4px 0 whitesmoke;
+  transition: all 0.15s;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.go_btn {
+  display: block;
+  text-align: center;
+  font-size: 1.2rem;
+  height: 3rem;
+  width: 100%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 4px 0 palegreen;
+  background-color: palegreen;
+  transition: all 0.2s;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.go_btn:hover {
+  background-color: lightgreen;
+  box-shadow: 0 0 4px 0 lightgreen;
 }
 
 .add_to_WL_btn {
