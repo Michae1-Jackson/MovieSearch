@@ -7,23 +7,47 @@ var model = {
 var api = {
   root: "https://api.themoviedb.org/3",
   token: myApiKey,
+  posterUrl: (posterPath) => {
+    return `https://image.tmdb.org/t/p/w300/${posterPath}`;
+  },
 };
 
 $(document).ready(function () {
   discoverMovies(render);
 });
 
-$("#movie_search").submit((event) => {
+$("#search_by_title").submit((event) => {
   event.preventDefault();
-  searchMovies($("#search_input").val(), render);
+  searchByTitle($("#title_input").val(), render);
 });
 
-function discoverMovies(callback) {
+$("#search_by_topic").submit((event) => {
+  event.preventDefault();
+  searchByTopic($("#topic_input").val(), render);
+});
+
+function discoverMovies(callback, keywords) {
   $.ajax({
     url: `${api.root}/discover/movie`,
     data: {
       api_key: api.token,
       page: randInt(1, 100),
+      keywords: keywords,
+    },
+    success: (response) => {
+      model.browseItems = response.results;
+      console.log(model.browseItems);
+      callback();
+    },
+  });
+}
+
+function searchByTitle(title, callback) {
+  $.ajax({
+    url: `${api.root}/search/movie`,
+    data: {
+      api_key: api.token,
+      query: title,
     },
     success: (response) => {
       model.browseItems = response.results;
@@ -32,16 +56,16 @@ function discoverMovies(callback) {
   });
 }
 
-function searchMovies(searchFilm, callback) {
+function searchByTopic(topic, callback) {
   $.ajax({
-    url: `${api.root}/search/movie`,
+    url: `${api.root}/search/keyword`,
     data: {
       api_key: api.token,
-      query: searchFilm,
+      query: topic,
     },
     success: (response) => {
-      model.browseItems = response.results;
-      callback();
+      let keywords = response.results.map((res) => res.id).join("|");
+      discoverMovies(callback, keywords);
     },
   });
 }
@@ -49,8 +73,15 @@ function searchMovies(searchFilm, callback) {
 function movieBlockCreate(movie) {
   let movieBlock = $("<li>").addClass("movie_block");
   let title = $("<p>").text(movie.title).addClass("movie_title");
+  let poster = $("<img>")
+    .addClass("movie_poster")
+    .attr("src", api.posterUrl(movie.poster_path))
+    .on("error", (el) =>
+      $(el.target).attr("src", "assets/images/No_image_available.svg")
+    );
   let overview = $("<p>").text(movie.overview).addClass("movie_overview");
-  return movieBlock.append(title, overview);
+  let content = $("<div>").addClass("movie_content").append(poster, overview);
+  return movieBlock.append(title, content);
 }
 
 function render() {
@@ -58,6 +89,16 @@ function render() {
   browseList.empty();
   model.watchListItems.forEach((movie) => {
     let movieBlock = movieBlockCreate(movie);
+    let removeBtn = $("<div>")
+      .text("I watched it!")
+      .addClass(["cool_btn", "remove_from_WL_btn"])
+      .click(() => {
+        model.watchListItems = model.watchListItems.filter(
+          (movieInList) => movieInList.title != movie.title
+        );
+        render();
+      });
+    movieBlock.append(removeBtn);
     watchList.append(movieBlock, $("<div>").addClass("item_del"));
   });
   model.browseItems.forEach((movie) => {
@@ -68,18 +109,21 @@ function render() {
     if (!added) {
       let addBtn = $("<div>")
         .text("Add to Watch List")
-        .addClass("add_to_WL_btn")
+        .addClass(["cool_btn", "add_to_WL_btn"])
         .click(() => {
           model.watchListItems.push({
             title: movie.title,
             overview: movie.overview,
+            poster_path: movie.poster_path,
           });
           render();
         });
       movieBlock.append(addBtn);
     } else
       movieBlock.append(
-        $("<div>").text("Aready in your Watch List!").addClass("already_in_WL")
+        $("<div>")
+          .text("Aready in your Watch List!")
+          .addClass(["cool_btn", "already_in_WL"])
       );
     browseList.append(movieBlock, $("<div>").addClass("item_del"));
   });
