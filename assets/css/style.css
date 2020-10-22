@@ -56,12 +56,11 @@ ul {
 
 .movie_block {
   position: relative;
-  min-height: 500px;
 }
 
 .cool_btn {
   position: absolute;
-  bottom: 1rem;
+  bottom: 3.5%;
   right: 8%;
   text-align: center;
   padding-top: 20px;
@@ -84,16 +83,19 @@ ul {
   margin: 0 0.75rem;
   display: grid;
   grid-template-columns: 40% 60%;
-  column-gap: 1rem;
 }
 
 .movie_poster {
-  width: 100%;
+  width: 75%;
   max-width: 300px;
   max-height: 500px;
   justify-self: center;
   display: block;
   border-radius: 4px;
+}
+
+.no_poster {
+  padding: 50px 0 95px 0;
 }
 
 .movie_overview {
@@ -104,10 +106,9 @@ ul {
 
 .item_del {
   height: 2px;
-  width: 100%;
-  max-width: 856px;
+  width: 86%;
   background-color: darkgrey;
-  margin: 15px auto;
+  margin: 15px 0 15px 6%;
 }
 
 /* Watch List Section */
@@ -129,6 +130,56 @@ ul {
   background-color: tomato;
   user-select: none;
 }
+
+.emptyWatchList {
+  height: 50px;
+  text-align: center;
+  font-size: 2rem;
+}
+
+/* FlickList */
+
+.empty_watchlist {
+  height: 50px;
+}
+
+.not_empty_watchlist {
+  visibility: hidden;
+  width: 60%;
+}
+
+.flicklist {
+  position: relative;
+}
+
+.flick_btn {
+  position: absolute;
+  top: 45%;
+  height: 50px;
+  width: 50px;
+  background-color: magenta;
+  cursor: pointer;
+}
+
+.flick_btn--left {
+  left: -50px;
+}
+.flick_btn--right {
+  right: -50px;
+}
+
+.flicklist_container {
+  height: 100%;
+  position: relative;
+}
+
+.flick_item {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
 
 /* Browse List Section */
 
@@ -197,4 +248,13 @@ ul {
 .add_to_WL_btn:hover {
   background-color: skyblue;
   user-select: none;
+}
+
+.emptyBrowse {
+  padding-top: 170px;
+  height: 290px;
+  text-align: center;
+  font-size: 4rem;
+  font-variant-caps: all-petite-caps;
+  letter-spacing: 2px;
 }
