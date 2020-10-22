@@ -1,12 +1,12 @@
 var watchList = $("#watchlist");
-var flicklist = $(".flicklist");
+var flickList = $(".flicklist");
 var flickBtns = $(".flick_btn");
 var browseList = $("#browselist");
 
 var substrate = $("<img>")
   .attr("src", "assets/images/substrate.png")
   .addClass("not_empty_watchlist");
-flicklist.addClass("empty_watchlist");
+flickList.addClass("empty_watchlist");
 flickBtns.hide();
 
 var model = {
@@ -100,9 +100,9 @@ function render() {
   browseList.empty();
 
   if (model.watchListItems.length) {
-    if (flicklist.hasClass("empty_watchlist")) {
-      flicklist.removeClass("empty_watchlist");
-      flicklist.append(substrate);
+    if (flickList.hasClass("empty_watchlist")) {
+      flickList.removeClass("empty_watchlist");
+      flickList.append(substrate);
       flickBtns.show();
     }
     model.watchListItems.forEach((movie) => {
@@ -111,6 +111,7 @@ function render() {
         .text("I watched it!")
         .addClass(["cool_btn", "remove_from_WL_btn"])
         .click(() => {
+          flickMove(movieBlock.parent());
           model.watchListItems = model.watchListItems.filter(
             (movieInList) => movieInList.id != movie.id
           );
@@ -121,8 +122,8 @@ function render() {
       watchList.append(flickItem);
     });
   } else {
-    if (flicklist.has(".not_empty_watchlist")) {
-      flicklist.addClass("empty_watchlist");
+    if (flickList.has(".not_empty_watchlist")) {
+      flickList.addClass("empty_watchlist");
       $(".not_empty_watchlist").remove();
       flickBtns.hide();
     }
@@ -167,4 +168,5 @@ function render() {
       .addClass("emptyBrowse");
     browseList.append(emptyBrowse);
   }
+  flickRender();
 }
