@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="104.88632"
+   width="65.444481"
+   viewBox="0 0 65.444483 104.88632"
+   x="0px"
+   y="0px"
+   version="1.1"
+   id="svg14"
+   sodipodi:docname="left_arrow_chevron.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+  <metadata
+     id="metadata20">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Arrow Filled Chevron Left</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs18">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3037">
+      <stop
+         style="stop-color:#4c3c62;stop-opacity:1;"
+         offset="0"
+         id="stop3033" />
+      <stop
+         style="stop-color:#4c3c62;stop-opacity:0;"
+         offset="1"
+         id="stop3035" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient2937">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop2933" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop2935" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient2893"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#22280b;stop-opacity:1;"
+         offset="0"
+         id="stop2891" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient2803"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#22280b;stop-opacity:1;"
+         offset="0"
+         id="stop2801" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient877"
+       osb:paint="gradient">
+      <stop
+         style="stop-color:#22280b;stop-opacity:1;"
+         offset="0"
+         id="stop873" />
+      <stop
+         style="stop-color:#22280b;stop-opacity:0;"
+         offset="1"
+         id="stop875" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2937"
+       id="linearGradient2939"
+       x1="0.013421953"
+       y1="44.977501"
+       x2="52.681873"
+       y2="44.977501"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3029"
+       x="-0.0029295697"
+       width="1.0058591"
+       y="-0.0017151851"
+       height="1.0034304">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.06428996"
+         id="feGaussianBlur3031" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3037"
+       id="linearGradient3039"
+       x1="8.0876799"
+       y1="36.838547"
+       x2="97.263481"
+       y2="36.178631"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:document-rotation="0"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2448"
+     inkscape:window-height="1312"
+     id="namedview16"
+     showgrid="false"
+     inkscape:zoom="7.8248304"
+     inkscape:cx="6.1479369"
+     inkscape:cy="47.331229"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g6" />
+  <title
+     id="title2">Arrow Filled Chevron Left</title>
+  <g
+     transform="translate(4.41411,-3.7880896)"
+     data-name="Layer 2"
+     id="g8" />
+  <g
+     id="g6"
+     transform="matrix(1.2353366,0,0,1.1619521,0.42962332,-0.07413607)"
+     style="opacity:1;mix-blend-mode:darken;fill:url(#linearGradient2939);fill-opacity:1">
+    <path
+       id="path4"
+       d="M 4.3530956,34.219971 35.433096,3.1299717 a 10,10 0 0 1 15.1,1.15 10.23,10.23 0 0 1 -1.25,13.2199993 l -27.72,27.72 28,28 a 10,10 0 0 1 -1.15,15.1 10.23,10.23 0 0 1 -13.22,-1.25 l -30.8400004,-30.85 a 15.58,15.58 0 0 1 0,-22 z"
+       style="opacity:0.819672;fill:url(#linearGradient3039);fill-opacity:1;filter:url(#filter3029)" />
+  </g>
+</svg>

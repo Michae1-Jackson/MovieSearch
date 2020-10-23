@@ -1,42 +1,47 @@
 $(window).on("resize", flickRender);
+var curItemIndex = 0;
 
 function flickRender() {
   var itemWidth = watchList[0].getBoundingClientRect().width;
-  if (watchList.length == 1) {
-    $(".flick_item").eq(0).addClass("cur_item");
-  }
   $(".flick_item").each((index, item) => {
     $(item).css({ left: index * itemWidth });
   });
-  $(".flick_btn--right").off("click", moveListToRight);
-  $(".flick_btn--right").on("click", moveListToRight);
-  $(".flick_btn--left").off("click", moveListToLeft);
-  $(".flick_btn--left").on("click", moveListToLeft);
+  console.log(curItemIndex);
+  $(".flick_item").eq(curItemIndex).addClass("cur_item");
+  arrowsHandler();
 }
 
-function flickMove(item) {
-  if (item.next().length) {
-    moveListToRight();
-  } else if (item.prev().length) {
-    moveListToLeft();
+function newFlickItem() {
+  let curItem = $(".flick_item").last();
+  let shift = curItem[0].style.left;
+  watchList.css({ transform: `translateX(-${shift})` });
+  $(".cur_item").removeClass("cur_item");
+  curItem.addClass("cur_item");
+  arrowsHandler();
+}
+
+function moveList(way, del) {
+  let shiftItem = $(".cur_item");
+  if (del && !shiftItem.next().length && shiftItem.prev().length) {
+    shiftItem = shiftItem.prev();
+  } else {
+    if (way && shiftItem.next().length) {
+      shiftItem = shiftItem.next();
+    } else if (!del && !way && shiftItem.prev().length) {
+      shiftItem = shiftItem.prev();
+    }
+    $(".cur_item").removeClass("cur_item");
+    shiftItem.addClass("cur_item");
   }
+  curItemIndex = $(".flick_item").index(shiftItem);
+  let shift = shiftItem[0].style.left;
+  watchList.css({ transform: `translateX(-${shift})` });
+  arrowsHandler();
 }
 
-function moveListToRight() {
-  curItem = $(".cur_item");
-  nextItem = curItem.next();
-  console.log(curItem);
-  shift = nextItem[0].style.left;
-  watchList.css({ transform: `translateX(-${shift})` });
-  curItem.removeClass("cur_item");
-  nextItem.addClass("cur_item");
-}
-
-function moveListToLeft() {
-  curItem = $(".cur_item");
-  prevItem = curItem.prev();
-  shift = prevItem[0].style.left;
-  watchList.css({ transform: `translateX(-${shift})` });
-  curItem.removeClass("cur_item");
-  prevItem.addClass("cur_item");
+function arrowsHandler() {
+  if ($(".cur_item").prev().length) flickBtns.eq(0).show();
+  else flickBtns.eq(0).hide();
+  if ($(".cur_item").next().length) flickBtns.eq(1).show();
+  else flickBtns.eq(1).hide();
 }

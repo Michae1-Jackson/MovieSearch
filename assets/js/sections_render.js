@@ -1,13 +1,15 @@
 var watchList = $("#watchlist");
-var flickList = $(".flicklist");
 var flickBtns = $(".flick_btn");
 var browseList = $("#browselist");
-
 var substrate = $("<img>")
   .attr("src", "assets/images/substrate.png")
-  .addClass("not_empty_watchlist");
-flickList.addClass("empty_watchlist");
-flickBtns.hide();
+  .addClass("watchlist_substrate");
+var watchListPlug = $("<div>")
+  .text("In your watch list no movies yet. Let`s find some!")
+  .addClass("watchlist_plug");
+var browsePlug = $("<div>")
+  .text("No such movies found")
+  .addClass("browse_plug");
 
 var model = {
   watchListItems: [],
@@ -45,7 +47,7 @@ function discoverMovies(callback, keywords) {
     data: queryData,
     success: (response) => {
       model.browseItems = response.results;
-      console.log(model.browseItems);
+      // console.log(model.browseItems);
       callback();
     },
   });
@@ -82,16 +84,17 @@ function searchByTopic(topic, callback) {
 function movieBlockCreate(movie) {
   let movieBlock = $("<div>").addClass("movie_block");
   let title = $("<p>").text(movie.title).addClass("movie_title");
-  let poster = $("<img>")
-    .addClass("movie_poster")
-    .attr("src", api.posterUrl(movie.poster_path))
-    .on("error", (el) =>
-      $(el.target)
-        .attr("src", "assets/images/No_image_available.svg")
-        .addClass("no_poster")
-    );
+  let poster = $("<img>").addClass("movie_poster");
+  if (movie.poster_path) poster.attr("src", api.posterUrl(movie.poster_path));
+  else
+    poster
+      .attr("src", "assets/images/no_image_available_new.svg")
+      .addClass("no_poster");
+  let posterWrap = $("<div>").addClass("poster_wrap");
   let overview = $("<p>").text(movie.overview).addClass("movie_overview");
-  let content = $("<div>").addClass("movie_content").append(poster, overview);
+  let content = $("<div>")
+    .addClass("movie_content")
+    .append(posterWrap.append(poster), overview);
   return movieBlock.append(title, content);
 }
 
@@ -100,38 +103,23 @@ function render() {
   browseList.empty();
 
   if (model.watchListItems.length) {
-    if (flickList.hasClass("empty_watchlist")) {
-      flickList.removeClass("empty_watchlist");
-      flickList.append(substrate);
-      flickBtns.show();
-    }
+    if (model.watchListItems.length == 1) flickOn();
     model.watchListItems.forEach((movie) => {
       let movieBlock = movieBlockCreate(movie);
       let removeBtn = $("<div>")
         .text("I watched it!")
         .addClass(["cool_btn", "remove_from_WL_btn"])
         .click(() => {
-          flickMove(movieBlock.parent());
+          moveList(0, 1);
           model.watchListItems = model.watchListItems.filter(
             (movieInList) => movieInList.id != movie.id
           );
           render();
         });
       movieBlock.append(removeBtn);
-      let flickItem = $("<li>").append(movieBlock).addClass("flick_item");
-      watchList.append(flickItem);
+      watchList.append($("<li>").append(movieBlock).addClass("flick_item"));
     });
-  } else {
-    if (flickList.has(".not_empty_watchlist")) {
-      flickList.addClass("empty_watchlist");
-      $(".not_empty_watchlist").remove();
-      flickBtns.hide();
-    }
-    let emptyWatchList = $("<div>")
-      .text("In your watch list no movies yet. Let`s find some!")
-      .addClass("emptyWatchList");
-    watchList.append(emptyWatchList);
-  }
+  } else flickOff();
 
   if (model.browseItems.length) {
     model.browseItems.forEach((movie) => {
@@ -151,6 +139,7 @@ function render() {
               poster_path: movie.poster_path,
             });
             render();
+            newFlickItem();
           });
         movieBlock.append(addBtn);
       } else
@@ -162,11 +151,21 @@ function render() {
       movieBlock.append($("<div>").addClass("item_del"));
       browseList.append($("<li>").append(movieBlock));
     });
-  } else {
-    let emptyBrowse = $("<div>")
-      .text("No such movies found")
-      .addClass("emptyBrowse");
-    browseList.append(emptyBrowse);
-  }
+  } else browseList.append(browsePlug);
   flickRender();
+}
+
+function flickOn() {
+  $(".watchlist_plug").remove();
+  $(".flicklist").append(substrate);
+  $(".flick_item").eq(0).addClass("cur_item");
+  $(".flick_btn--left").on("click", () => moveList(0, 0));
+  $(".flick_btn--right").on("click", () => moveList(1, 0));
+}
+
+function flickOff() {
+  watchList.append(watchListPlug);
+  $(".watchlist_substrate").remove();
+  $(".flick_btn--left").off("click");
+  $(".flick_btn--right").off("click");
 }

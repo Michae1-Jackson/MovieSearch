@@ -55,6 +55,7 @@ ul {
 }
 
 .movie_block {
+  padding-left: 1.5rem;
   position: relative;
 }
 
@@ -85,17 +86,24 @@ ul {
   grid-template-columns: 40% 60%;
 }
 
+.poster_wrap {
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
 .movie_poster {
-  width: 75%;
-  max-width: 300px;
-  max-height: 500px;
-  justify-self: center;
-  display: block;
+  max-width: 80%;
+  height: auto;
   border-radius: 4px;
 }
 
 .no_poster {
-  padding: 50px 0 95px 0;
+  max-height: 500px;
 }
 
 .movie_overview {
@@ -138,22 +146,19 @@ ul {
   user-select: none;
 }
 
-.emptyWatchList {
+.watchlist_substrate {
+  visibility: hidden;
+  width: 63%;
+}
+
+.watchlist_plug {
   height: 50px;
   text-align: center;
   font-size: 2rem;
 }
 
+
 /* FlickList */
-
-.empty_watchlist {
-  height: 50px;
-}
-
-.not_empty_watchlist {
-  visibility: hidden;
-  width: 60%;
-}
 
 .flicklist {
   overflow-x: hidden;
@@ -163,18 +168,26 @@ ul {
 .flick_btn {
   position: absolute;
   top: 45%;
-  height: 50px;
-  width: 50px;
-  background-color: magenta;
+  height: 63px;
+  width: 40px;
   cursor: pointer;
   z-index: 1;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: transform 0.2s;
+}
+
+.flick_btn:hover {
+  transform: scale(1.2);
 }
 
 .flick_btn--left {
-  left: 0;
+  left: 10px;
+  background-image: url("../images/left_arrow_chevron.svg");
 }
 .flick_btn--right {
-  right: 0;
+  right: 10px;
+  background-image: url("../images/right_arrow_chevron.svg");
 }
 
 .flicklist_container {
@@ -188,7 +201,6 @@ ul {
   bottom: 0;
   width: 100%;
 }
-
 
 /* Browse List Section */
 
@@ -259,7 +271,7 @@ ul {
   user-select: none;
 }
 
-.emptyBrowse {
+.browse_plug {
   padding-top: 170px;
   height: 290px;
   text-align: center;
