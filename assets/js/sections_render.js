@@ -24,7 +24,10 @@ var api = {
   },
 };
 
-$(document).ready(function () {
+$(document).ready(() => {
+  if (localStorage.length) {
+    model.watchListItems = localStorage.getItem("watchlist");
+  }
   discoverMovies(render);
 });
 
@@ -37,6 +40,10 @@ $("#search_by_topic").submit((event) => {
   event.preventDefault();
   searchByTopic($("#topic_input").val(), render);
 });
+
+function saveWatchList() {
+  localStorage.setItem("watchlist", JSON.stringify(model.watchListItems));
+}
 
 function discoverMovies(callback, keywords) {
   let queryData = { api_key: api.token };
@@ -152,6 +159,7 @@ function render() {
       browseList.append($("<li>").append(movieBlock));
     });
   } else browseList.append(browsePlug);
+  saveWatchList();
   flickRender();
 }
 
