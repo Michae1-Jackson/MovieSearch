@@ -6,7 +6,6 @@ function flickRender() {
   $(".flick_item").each((index, item) => {
     $(item).css({ left: index * itemWidth });
   });
-  console.log(curItemIndex);
   $(".flick_item").eq(curItemIndex).addClass("cur_item");
   arrowsHandler();
 }

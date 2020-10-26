@@ -25,8 +25,11 @@ var api = {
 };
 
 $(document).ready(() => {
-  if (localStorage.length) {
-    model.watchListItems = localStorage.getItem("watchlist");
+  console.log(localStorage);
+  if (localStorage.getItem("watchlist")) {
+    let watchListData = JSON.parse(localStorage.getItem("watchlist"));
+    model.watchListItems = watchListData;
+    flickOn();
   }
   discoverMovies(render);
 });
@@ -121,6 +124,7 @@ function render() {
           model.watchListItems = model.watchListItems.filter(
             (movieInList) => movieInList.id != movie.id
           );
+          saveWatchList();
           render();
         });
       movieBlock.append(removeBtn);
@@ -145,6 +149,7 @@ function render() {
               overview: movie.overview,
               poster_path: movie.poster_path,
             });
+            saveWatchList();
             render();
             newFlickItem();
           });
@@ -159,7 +164,6 @@ function render() {
       browseList.append($("<li>").append(movieBlock));
     });
   } else browseList.append(browsePlug);
-  saveWatchList();
   flickRender();
 }
 
