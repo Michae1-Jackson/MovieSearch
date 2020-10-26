@@ -25,7 +25,6 @@ var api = {
 };
 
 $(document).ready(() => {
-  console.log(localStorage);
   if (localStorage.getItem("watchlist")) {
     let watchListData = JSON.parse(localStorage.getItem("watchlist"));
     model.watchListItems = watchListData;
